@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .horse{
+        width: 50px;
+        height: 50px;
+        position: relative;
+    }
+</style>
+<body>
+    <div id='raceTrack' style='border-right:solid yellow 5px;width:900px;height:100%;background-color:green'>
+       
+    <button onclick="start()">Go</button>
+    </div>
+ <script>
+     const horses =[]//empty array
+     let winner = null
+ class Horse{
+    constructor(colour,box){
+        this.colour = colour
+        this.box = box
+        this.box.style.backgroundColor=colour
+        this.box.classList.add("horse")// Style dog
+        this.x=0
+    }
+    move(){
+        this.x += Math.random() * 10
+        this.x = Math.floor(this.x)
+        this.box.style.left = this.x + "px"
+        if (this.x > 900) { winner = this }
+    }
+ }
+
+ 
+ colour=['red', 'blue', 'black','pink', 'yellow', 'white', 'violet', 'orange', 'cyan', 'magenta']
+ //let horse = new Horse("red",document.getElementById('box') )
+
+
+colour.forEach(col => {
+   let box = document.createElement('div')
+    document.getElementById('raceTrack').appendChild(box)//?? 
+    horses.push(new Horse(col,box))
+});
+
+
+function start(){
+    //setInterval (moveBox,50)
+    requestAnimationFrame(moveHorses)
+    
+}
+ function moveHorses(){
+     horses.forEach(horse=> {
+        horse.move()
+     })
+     if (winner == null){
+        requestAnimationFrame(moveHorses)
+     }
+     else {
+         alert(`The winner is ${winner.colour}`)
+     }
+        //requestAnimationFrame(moveHorses)
+        
+        //if(x<900){
+         //   requestAnimationFrame(moveHorses)
+        //} 
+         
+ }
+ </script>
+</body>
+</html>
