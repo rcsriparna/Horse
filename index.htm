@@ -12,15 +12,30 @@
         height: 50px;
         position: relative;
     }
+    #win {
+        text-align: center;
+        color: crimson ;
+        font-size: 20px;
+    }
+    header {
+        text-align: center;
+    }
 </style>
 <body>
+    <div>
+    <header><h1>Welcome to Horse Racing</h1></header>
+    <div id= "money"> Money: £10</div>
+    <div id= "win"></div>
+    <button onclick="start()">Click Me</button>
+</div>
     <div id='raceTrack' style='border-right:solid yellow 5px;width:900px;height:100%;background-color:green'>
        
-    <button onclick="start()">Go</button>
+   
     </div>
  <script>
      const horses =[]//empty array
      let winner = null
+     let money= 10
  class Horse{
     constructor(colour,box){
         this.colour = colour
@@ -38,7 +53,7 @@
  }
 
  
- colour=['red', 'blue', 'black','pink', 'yellow', 'white', 'violet', 'orange', 'cyan', 'magenta']
+ colour=['red', 'blue', 'black','pink', 'yellow', 'grey', 'violet', 'orange', 'cyan', 'magenta']
  //let horse = new Horse("red",document.getElementById('box') )
 
 
@@ -52,7 +67,8 @@ colour.forEach(col => {
 function start(){
     //setInterval (moveBox,50)
     requestAnimationFrame(moveHorses)
-    
+    money--
+    console.log(money)
 }
  function moveHorses(){
      horses.forEach(horse=> {
@@ -62,13 +78,10 @@ function start(){
         requestAnimationFrame(moveHorses)
      }
      else {
-         alert(`The winner is ${winner.colour}`)
+         document.getElementById("win").innerHTML = "The winner is " + winner.colour
+         
      }
-        //requestAnimationFrame(moveHorses)
-        
-        //if(x<900){
-         //   requestAnimationFrame(moveHorses)
-        //} 
+    
          
  }
  </script>
